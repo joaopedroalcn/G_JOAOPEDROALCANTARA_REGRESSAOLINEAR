@@ -1,6 +1,6 @@
 """
 @file warm_up_exercise.py
-@brief Returns a 5x5 identity matrix.
+@brief Returns a 5x5 identity matrix and provides helper functions for linear regression.
 """
 
 import numpy as np
@@ -11,7 +11,7 @@ def warm_up_exercise1():
 
     @return np.ndarray Identity matrix (5x5)
     """
-    return 
+    return np.eye(5)  # np.eye cria uma matriz identidade de tamanho 5x5
 
 def warm_up_exercise2(m=5):
     """
@@ -23,7 +23,7 @@ def warm_up_exercise2(m=5):
     @return np.ndarray
         Vetor de shape (m, 1) com todos os valores iguais a 1.
     """
-    return 
+    return np.ones((m, 1))  # Cria um vetor coluna (m linhas, 1 coluna) com todos os valores iguais a 1
 
 def warm_up_exercise3(x):
     """
@@ -35,14 +35,10 @@ def warm_up_exercise3(x):
     @return np.ndarray
         Matriz de shape (m, 2), com a primeira coluna sendo 1s (bias) e a segunda os valores de x.
     """
-    # obtem o número de exemplos
-    m = 
-    # Garante que x é um vetor coluna usando reshape. Use np.reshape
-    x = 
-    # Adiciona uma coluna de 1s (bias) ao vetor x. Use np.ones para criar um vetor de 1s
-    bias = 
-    # Concatena a coluna de 1s (bias) com o vetor x. Use np.hstack para concatenar horizontalmente e retorne
-    return 
+    m = x.shape[0]  # Obtém o número de exemplos (linhas)
+    x = np.reshape(x, (m, 1))  # Garante que x seja vetor coluna
+    bias = np.ones((m, 1))  # Cria a coluna de 1s (bias)
+    return np.hstack((bias, x))  # Concatena bias e x horizontalmente (lado a lado)
 
 def warm_up_exercise4(X, theta):
     """
@@ -57,8 +53,7 @@ def warm_up_exercise4(X, theta):
     @return np.ndarray
         Vetor de predições (m,)
     """
-    # retorna o resultado da multiplicação matricial entre X e θ
-    return 
+    return X @ theta  # Multiplicação matricial (produto escalar entre X e os pesos theta)
 
 def warm_up_exercise5(predictions, y):
     """
@@ -73,9 +68,7 @@ def warm_up_exercise5(predictions, y):
     @return np.ndarray
         Vetor com os erros quadráticos: (pred - y)^2
     """
-    # Calcula o vetor de erros quadráticos (squared errors) entre as predições e os valores reais
-    # O vetor de erros quadráticos é calculado como a diferença entre as predições e os valores reais
-    return 
+    return (predictions - y) ** 2  # Erros quadráticos: diferença ao quadrado entre predição e valor real
 
 def warm_up_exercise6(errors):
     """
@@ -87,9 +80,7 @@ def warm_up_exercise6(errors):
     @return float
         Custo médio (mean cost)
     """
-    # O custo médio é calculado como a média dos erros quadráticos
-    # Obtenha usando np.mean e não esqueça de dividir por 2
-    return 
+    return np.mean(errors) / 2  # Custo médio = média dos erros quadráticos dividido por 2
 
 def warm_up_exercise7(X, y, theta):
     """
@@ -107,11 +98,6 @@ def warm_up_exercise7(X, y, theta):
     @return float
         Custo médio (mean cost)
     """
-    # Use as funções auxiliares para calcular o custo médio
-    # 1. Calcule as predições usando a função warm_up_exercise4
-    # 2. Calcule os erros quadráticos usando a função warm_up_exercise5
-    # 3. Calcule o custo médio usando a função warm_up_exercise6
-    # 4. Retorne o custo médio
-    predictions = 
-    errors = 
-    return 
+    predictions = warm_up_exercise4(X, theta)         # Passo 1: h(θ) = X @ θ
+    errors = warm_up_exercise5(predictions, y)        # Passo 2: Erros quadráticos
+    return warm_up_exercise6(errors)                  # Passo 3: Custo médio (mean cost)
