@@ -18,7 +18,12 @@ This script performs the following tasks:
 
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 import os
+
+# Adiciona o diretório "Functions" ao caminho de busca do Python
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'Functions')))
+
 
 from Functions.warm_up_exercises import warm_up_exercise1, warm_up_exercise2, warm_up_exercise3, warm_up_exercise4
 from Functions.warm_up_exercises import warm_up_exercise5, warm_up_exercise6, warm_up_exercise7
